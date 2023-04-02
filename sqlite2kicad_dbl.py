@@ -141,8 +141,7 @@ for table_name in table_names:
         cursor.execute(f'update "{table_name}" set KICAD_SCHLIB = "ORL-Diodes:TVS_Unidirection" where "Library Ref" = "TVS_Diode";')
         cursor.execute(f'update "{table_name}" set KICAD_SCHLIB = "Device:D_Zener" where "Library Ref" = "Zener_Diode";')
         #Others
-        cursor.execute(f'''update "{table_name}" set KICAD_SCHLIB = "ORL_{table_name}:" || "Library Ref"
-            where "Library Ref" not in  ("Resistor" ,"Capacitor", "ELEC_Capacitor", "Inductance", "Feridbeed", "STD_Diode", "Schottky_Diode", "LED", "TVS_Diode", "Zener_Diode");''')
+        cursor.execute(f'update "{table_name}" set KICAD_SCHLIB = "ORL_{table_name}:" || "Library Ref" where "KICAD_MODLIB" IS NULL;')
         
     # Footprint Sutunu ekle
     if "KICAD_MODLIB" not in json_table[0]:  
